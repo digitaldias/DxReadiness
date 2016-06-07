@@ -23,7 +23,7 @@ namespace ReadinessWeb.Controllers
 
 
         [HttpPut]
-        public async Task Put(Stream imageBytes)
+        public async Task Put(byte[] imageBytes)
         {
             if (!_byteStreamVerifier.IsValid(imageBytes))
                 return;
@@ -33,6 +33,7 @@ namespace ReadinessWeb.Controllers
 
             await NewMethod(imageBytes, imageAnalyzerActor);
         }
+
 
         private static async Task NewMethod(byte[] imageBytes, IImageAnalysisActor imageAnalyzerActor)
         {

@@ -2,9 +2,12 @@
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="ReadinessApiType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
    <Parameters>
       <Parameter Name="ReadinessWeb_InstanceCount" DefaultValue="-1" />
+      <Parameter Name="ImageAnalysisActorService_PartitionCount" DefaultValue="10" />
+      <Parameter Name="ImageAnalysisActorService_MinReplicaSetSize" DefaultValue="2" />
+      <Parameter Name="ImageAnalysisActorService_TargetReplicaSetSize" DefaultValue="3" />
    </Parameters>
    <ServiceManifestImport>
-     <ServiceManifestRef ServiceManifestName="ImageAnalysisActorPkg" ServiceManifestVersion="1.0.0" />
+      <ServiceManifestRef ServiceManifestName="ImageAnalysisActorPkg" ServiceManifestVersion="1.0.0" />
    </ServiceManifestImport>
    <ServiceManifestImport>
       <ServiceManifestRef ServiceManifestName="ReadinessWebPkg" ServiceManifestVersion="1.0.0" />
@@ -15,6 +18,11 @@
          <StatelessService ServiceTypeName="ReadinessWebType" InstanceCount="[ReadinessWeb_InstanceCount]">
             <SingletonPartition />
          </StatelessService>
+      </Service>
+      <Service Name="ImageAnalysisActorService" GeneratedIdRef="9dce39ee-e8e2-44c4-b5f5-c3e3b86669ea|Persisted">
+         <StatefulService ServiceTypeName="ImageAnalysisActorServiceType" TargetReplicaSetSize="[ImageAnalysisActorService_TargetReplicaSetSize]" MinReplicaSetSize="[ImageAnalysisActorService_MinReplicaSetSize]">
+            <UniformInt64Partition PartitionCount="[ImageAnalysisActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+         </StatefulService>
       </Service>
    </DefaultServices>
 </ApplicationManifest>
