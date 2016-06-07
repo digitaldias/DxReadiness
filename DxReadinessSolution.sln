@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageAnalysisActor", "Image
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageAnalysisActor.Interfaces", "ImageAnalysisActor.Interfaces\ImageAnalysisActor.Interfaces.csproj", "{856D8E3D-D71F-4FFF-B64D-AE6D95CA1E64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DxReadinessSolution.Data.ImageRecognition.Test", "DxReadinessSolution.Data.ImageRecognition.Test\DxReadinessSolution.Data.ImageRecognition.Test.csproj", "{3E7D6E31-A977-4013-AD52-4ED5A02A5A28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,14 @@ Global
 		{856D8E3D-D71F-4FFF-B64D-AE6D95CA1E64}.Release|Any CPU.ActiveCfg = Release|x64
 		{856D8E3D-D71F-4FFF-B64D-AE6D95CA1E64}.Release|x64.ActiveCfg = Release|x64
 		{856D8E3D-D71F-4FFF-B64D-AE6D95CA1E64}.Release|x64.Build.0 = Release|x64
+		{3E7D6E31-A977-4013-AD52-4ED5A02A5A28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E7D6E31-A977-4013-AD52-4ED5A02A5A28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E7D6E31-A977-4013-AD52-4ED5A02A5A28}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3E7D6E31-A977-4013-AD52-4ED5A02A5A28}.Debug|x64.Build.0 = Debug|Any CPU
+		{3E7D6E31-A977-4013-AD52-4ED5A02A5A28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E7D6E31-A977-4013-AD52-4ED5A02A5A28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E7D6E31-A977-4013-AD52-4ED5A02A5A28}.Release|x64.ActiveCfg = Release|Any CPU
+		{3E7D6E31-A977-4013-AD52-4ED5A02A5A28}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,7 +122,5 @@ Global
 		{00D4AF6B-EFEC-429A-8D28-D733E9A88AF3} = {DD1735E1-D643-406C-8C4F-C77ECD897B3F}
 		{9B2D3033-CB62-425A-A433-B1F3286AE144} = {3139CC6D-F4AF-445F-A57E-52FFC8691D45}
 		{055D7C52-4B97-4012-891F-9AAA6DB9BFF8} = {3139CC6D-F4AF-445F-A57E-52FFC8691D45}
-		{91577A83-FB42-4807-A048-4DCB0AD83922} = {0A8B0284-9204-451D-B4C9-153C1392A52F}
-		{856D8E3D-D71F-4FFF-B64D-AE6D95CA1E64} = {0A8B0284-9204-451D-B4C9-153C1392A52F}
 	EndGlobalSection
 EndGlobal
