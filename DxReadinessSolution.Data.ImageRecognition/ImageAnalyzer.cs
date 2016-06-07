@@ -14,39 +14,24 @@ namespace DxReadinessSolution.Data.ImageRecognition
     {
         private string SubscriptionKey = "2aa91152614543edb036c0bd8f24c092";
         private string _status;
-
-
-        /// <summary>
-        /// Uploads the image to Project Oxford and performs analysis
-        /// </summary>
-        /// <param name="imageFilePath">The image file path.</param>
-        /// <returns></returns>
+        
+        
         public async Task<AnalysisResult> AnalyzeImage(Stream imageStream)
         {
-            // -----------------------------------------------------------------------
-            // KEY SAMPLE CODE STARTS HERE
-            // -----------------------------------------------------------------------
-
-            //
-            // Create Project Oxford Vision API Service client
-            //
+            
             VisionServiceClient VisionServiceClient = new VisionServiceClient(SubscriptionKey);
             Console.WriteLine("VisionServiceClient is created");
 
             using (imageStream )
             {
-                //
-                // Analyze the image for all visual features
-                //
+                
                 Console.WriteLine("Calling VisionServiceClient.AnalyzeImageAsync()...");
                 VisualFeature[] visualFeatures = new VisualFeature[] { VisualFeature.Adult, VisualFeature.Categories, VisualFeature.Color, VisualFeature.Description, VisualFeature.Faces, VisualFeature.ImageType, VisualFeature.Tags };
                 AnalysisResult analysisResult = await VisionServiceClient.AnalyzeImageAsync(imageStream, visualFeatures);
                 return analysisResult;
             }
 
-            // -----------------------------------------------------------------------
-            // KEY SAMPLE CODE ENDS HERE
-            // -----------------------------------------------------------------------
+            
         }
 
 
@@ -61,18 +46,14 @@ namespace DxReadinessSolution.Data.ImageRecognition
         {
             _status = "Analyzing...";
 
-            //
-            // Either upload an image, or supply a url
-            //
+            
             AnalysisResult analysisResult;
             
             analysisResult = await AnalyzeImage(imageStream);
             
             _status = "Analyzing Done";
 
-            //
-            // Log analysis result in the log window
-            //
+            
             Console.WriteLine("");
             Console.WriteLine("Analysis Result:");
             //LogAnalysisResult(analysisResult);
