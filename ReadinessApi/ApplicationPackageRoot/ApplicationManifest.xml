@@ -4,6 +4,9 @@
       <Parameter Name="ReadinessWeb_InstanceCount" DefaultValue="-1" />
    </Parameters>
    <ServiceManifestImport>
+     <ServiceManifestRef ServiceManifestName="ImageAnalysisActorPkg" ServiceManifestVersion="1.0.0" />
+   </ServiceManifestImport>
+   <ServiceManifestImport>
       <ServiceManifestRef ServiceManifestName="ReadinessWebPkg" ServiceManifestVersion="1.0.0" />
       <ConfigOverrides />
    </ServiceManifestImport>

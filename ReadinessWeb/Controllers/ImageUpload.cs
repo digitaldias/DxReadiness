@@ -1,6 +1,10 @@
 ﻿using DxReadinessSolution.Domain.Contracts;
+using ImageAnalysisActor.Interfaces;
+using Microsoft.ServiceFabric.Actors;
+using Microsoft.ServiceFabric.Actors.Client;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +23,23 @@ namespace ReadinessWeb.Controllers
 
 
         [HttpPut]
-        public void Put(byte[] imageStream)
+        public async Task Put(Stream imageBytes)
         {
-            if (!_byteStreamVerifier.IsValid(imageStream))
+            if (!_byteStreamVerifier.IsValid(imageBytes))
                 return;
 
+            var actorId = ActorId.CreateRandom();
+            var imageAnalyzerActor = ActorProxy.Create<IImageAnalysisActor>(actorId);
+
+            await NewMethod(imageBytes, imageAnalyzerActor);
+        }
+
+        private static async Task NewMethod(byte[] imageBytes, IImageAnalysisActor imageAnalyzerActor)
+        {
+            using (var memoryStream = new MemoryStream(imageBytes))
+            {
+                var result = await imageAnalyzerActor.AnalyzeImageStreamAsync(memoryStream);
+            }
         }
     }
 }
