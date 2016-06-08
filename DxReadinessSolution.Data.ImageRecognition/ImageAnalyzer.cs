@@ -2,10 +2,7 @@
 using Microsoft.ProjectOxford.Vision;
 using Microsoft.ProjectOxford.Vision.Contract;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DxReadinessSolution.Data.ImageRecognition
@@ -13,7 +10,6 @@ namespace DxReadinessSolution.Data.ImageRecognition
     public class ImageAnalyzer : IImageAnalyzer
     {
         private string SubscriptionKey = "2aa91152614543edb036c0bd8f24c092";
-        private string _status         = string.Empty;
         
         
         public async Task<AnalysisResult> AnalyzeImage(Stream imageStream)
@@ -35,15 +31,9 @@ namespace DxReadinessSolution.Data.ImageRecognition
 
         protected async Task DoWork(Stream imageStream)
         {
-            _status = "Analyzing...";
-
-            
             AnalysisResult analysisResult;
             
             analysisResult = await AnalyzeImage(imageStream);
-            
-            _status = "Analyzing Done";
-
             
             Console.WriteLine("");
             Console.WriteLine("Analysis Result:");
