@@ -9,6 +9,7 @@ using Microsoft.ProjectOxford.Vision.Contract;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DxReadinessSolution.Data.ImageRecognition
@@ -86,6 +87,21 @@ namespace DxReadinessSolution.Data.ImageRecognition
 
         private static void AddEmotions(Emotion emotion, Dictionary<string, float> em)
         {
+
+            //var firstPerson = emotionResult[0];
+
+            //var type = emotion.Scores.GetType();
+
+            //var list = type
+            //.GetProperties()
+            //.Select(property => new
+            //{
+            //    Name = property.Name,
+            //    Value = (float)property.GetValue(property)
+            //}).ToList();
+
+            //list.Where(o => o.Value > 0.7)
+            //   .OrderByDescending(o => o.Value);
 
             const double threshold = 0.7 ;
 
