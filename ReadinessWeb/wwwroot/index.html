@@ -26,6 +26,35 @@
     <![endif]-->
 
 
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(upload).click(function () {
+            var serviceURL = '/AjaxTest/FirstAjax';
+
+            $.ajax({
+                type: "PUT",
+                url: serviceURL,
+                data: param = "",
+                contentType: "image/jpeg; charset=utf-8",
+                dataType: "json",
+                success: successFunc,
+                error: errorFunc
+            });
+
+            function successFunc(data, status) {
+                alert(data);
+            }
+
+            function errorFunc() {
+                alert('error');
+            }
+        });
+    </script>
+
+
+
 </head>
 
     <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -75,16 +104,16 @@
                             
                             <p class="intro-text" >A teriffic cute picuture project.<br>Created by the picturiffics.</p>
                            
-                                <form name="someForm">
+                                <form name="Upload"  enctype="multipart/form-data" method="post">
                                     <p class="intro-text2">
                                         Allright, <br />send us an image!
                                     </p>
                                     <p>
-                                         <input class="btn btn-default btn-lg" type="file" name="uploadImage">
+                                         <input id="FileField"="btn btn-default btn-lg" type="file" runat="server" name="uploadImage" size="60">
                                     </p>
-                                    <p>
-                                        <input type="submit"/>
-                                    </p>
+
+                                    <input id="UploadButton" type="button" value="Upload Picture" onClick="uploadimage();" />
+                                   
                                 </form>
                                 
                                 <a href="#about" class="btn btn-circle page-scroll">
@@ -97,10 +126,16 @@
         </header>
 
 
-       
+    
        
     </body>
 </html>
+
+
+
+
+
+</script>
   <!-- jQuery -->
 <script src="js/jquery.js"></script>
 <!-- Bootstrap Core JavaScript -->

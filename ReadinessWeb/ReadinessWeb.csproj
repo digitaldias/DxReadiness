@@ -271,6 +271,8 @@
     <Content Include="wwwroot\img\map-marker.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="wwwroot\img\photo.jpg" />
+    <Content Include="wwwroot\img\photo.png" />
     <Content Include="wwwroot\index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
