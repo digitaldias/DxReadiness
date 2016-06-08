@@ -13,35 +13,26 @@ namespace DxReadinessSolution.Data.ImageRecognition
     public class ImageAnalyzer : IImageAnalyzer
     {
         private string SubscriptionKey = "2aa91152614543edb036c0bd8f24c092";
-        private string _status;
+        private string _status         = string.Empty;
         
         
         public async Task<AnalysisResult> AnalyzeImage(Stream imageStream)
         {
-            
             VisionServiceClient VisionServiceClient = new VisionServiceClient(SubscriptionKey);
             Console.WriteLine("VisionServiceClient is created");
 
             using (imageStream )
             {
-                
                 Console.WriteLine("Calling VisionServiceClient.AnalyzeImageAsync()...");
+
                 VisualFeature[] visualFeatures = new VisualFeature[] { VisualFeature.Adult, VisualFeature.Categories, VisualFeature.Color, VisualFeature.Description, VisualFeature.Faces, VisualFeature.ImageType, VisualFeature.Tags };
-                AnalysisResult analysisResult = await VisionServiceClient.AnalyzeImageAsync(imageStream, visualFeatures);
+                AnalysisResult analysisResult  = await VisionServiceClient.AnalyzeImageAsync(imageStream, visualFeatures);
+
                 return analysisResult;
             }
-
-            
         }
 
 
-
-        /// <summary>
-        /// Perform the work for this scenario
-        /// </summary>
-        /// <param name="imageUri">The URI of the image to run against the scenario</param>
-        /// <param name="upload">Upload the image to Project Oxford if [true]; submit the Uri as a remote url if [false];</param>
-        /// <returns></returns>
         protected async Task DoWork(Stream imageStream)
         {
             _status = "Analyzing...";
@@ -56,7 +47,6 @@ namespace DxReadinessSolution.Data.ImageRecognition
             
             Console.WriteLine("");
             Console.WriteLine("Analysis Result:");
-            //LogAnalysisResult(analysisResult);
         }
     }
 }

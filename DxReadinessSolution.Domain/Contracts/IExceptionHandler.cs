@@ -7,6 +7,10 @@ namespace DxReadinessSolution.Domain.Contracts
     {
         void Run(Action unsafeAction);
 
+
         Task RunAsync(Func<Task> unsafeAction);
+
+
+        T Get<T>(Func<T> unsafeFunction);
     }
 }

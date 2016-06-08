@@ -37,7 +37,19 @@ namespace DxReadinessSolution.Business
             {
                 _logger.LogException(ex);
             }
-            
+        }
+
+
+        public T Get<T>(Func<T> unsafeFunction) {
+            try
+            {
+                return unsafeFunction.Invoke();
+            }
+            catch(Exception ex)
+            {
+                _logger.LogException(ex);
+            }
+            return default(T);
         }
     }
 }
