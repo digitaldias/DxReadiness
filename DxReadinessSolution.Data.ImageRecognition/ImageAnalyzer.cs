@@ -62,7 +62,7 @@ namespace DxReadinessSolution.Data.ImageRecognition
         private static void sendMessage(ImageResult result)
         {
             //byte[] payloadBytes = result.ToString();
-            EventData sendEvent = new EventData((payloadBytes);
+            EventData sendEvent = new EventData();
 
             EventHubClient ehClient = EventHubClient.CreateFromConnectionString(connectionString);
             ehClient.SendAsync(sendEvent);
