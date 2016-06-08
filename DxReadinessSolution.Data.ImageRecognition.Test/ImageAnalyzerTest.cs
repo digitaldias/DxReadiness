@@ -15,7 +15,7 @@ namespace DxReadinessSolution.Data.ImageRecognition.Test
             // Arrange 
             var imageAnalyzer = new ImageAnalyzer();
 
-            string path = @"C:\temp\sample.jpg";
+            string path = @"C:\temp\sample1.jpg";
             var imageStream = File.OpenRead(path);
             
             // Act

@@ -46,6 +46,7 @@
     <Compile Include="Contracts\ILogger.cs" />
     <Compile Include="Contracts\IVerifier.cs" />
     <Compile Include="Entities\ImageResult.cs" />
+    <Compile Include="Entities\ImageAnalyzerConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
