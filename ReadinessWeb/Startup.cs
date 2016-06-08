@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin.StaticFiles;
+﻿using Microsoft.Owin;
+using Microsoft.Owin.StaticFiles;
 using Owin;
 using ReadinessWeb.IoC;
 using StructureMap;
@@ -38,10 +39,12 @@ namespace ReadinessWeb
 
         private static void ConfigureStaticFiles(IAppBuilder appBuilder)
         {
-            var options = new FileServerOptions();
-            options.FileSystem = 
-            appBuilder.UseDefaultFiles();
-            appBuilder.UseStaticFiles();
+            var defaultFileOptions = new DefaultFilesOptions();
+            defaultFileOptions.DefaultFileNames.Clear();
+            defaultFileOptions.DefaultFileNames.Add("index.html");
+
+            appBuilder.UseDefaultFiles(defaultFileOptions);
+            appBuilder.UseStaticFiles(@"./wwwroot");
         }
     }
 }

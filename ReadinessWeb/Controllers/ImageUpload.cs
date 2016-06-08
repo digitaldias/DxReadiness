@@ -38,7 +38,9 @@ namespace ReadinessWeb.Controllers
 
             using (var memoryStream = new MemoryStream(imageBytes))
             {
-                var result = await  _exceptionHandler.Get(() => imageAnalyzerActor.AnalyzeImageStreamAsync(memoryStream));
+                var result = await  _exceptionHandler.Get(() => 
+                    imageAnalyzerActor.AnalyzeImageStreamAsync(memoryStream)
+                );
             }
         }
     }
