@@ -21,7 +21,6 @@ namespace ReadinessWeb
             ConfigureRouting(config);
 
             appBuilder.UseWebApi(config);
-
         }
 
         private static void ConfigureDependencyInversion()
@@ -31,13 +30,14 @@ namespace ReadinessWeb
 
         private static void ConfigureRouting(HttpConfiguration config)
         {
+            config.MapHttpAttributeRoutes();
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            config.MapHttpAttributeRoutes();
         }
 
         private static void ConfigureStaticFiles(IAppBuilder appBuilder)

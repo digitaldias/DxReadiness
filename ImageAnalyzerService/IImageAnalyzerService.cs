@@ -7,6 +7,6 @@ namespace ImageAnalyzerService
 {
     public interface IImageAnalyzerService : IService
     {
-        Task<ImageResult> Analyze(Stream imageStream);
+        Task<ImageResult> Analyze(byte[] imageStream);
     }
 }
