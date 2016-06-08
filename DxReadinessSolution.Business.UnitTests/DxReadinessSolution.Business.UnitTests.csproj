@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3E7D6E31-A977-4013-AD52-4ED5A02A5A28}</ProjectGuid>
+    <ProjectGuid>{6505E783-5059-40E3-BEB9-B1244D54FDCF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DxReadinessSolution.Data.ImageRecognition.Test</RootNamespace>
-    <AssemblyName>DxReadinessSolution.Data.ImageRecognition.Test</AssemblyName>
+    <RootNamespace>DxReadinessSolution.Business.UnitTests</RootNamespace>
+    <AssemblyName>DxReadinessSolution.Business.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -43,20 +43,8 @@
       <HintPath>..\packages\FluentAssertions.4.8.0\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ProjectOxford.Vision, Version=1.0.296.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ProjectOxford.Vision.1.0.296.0\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Microsoft.ProjectOxford.Vision.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Should, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Should.1.1.20\lib\Should.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -76,17 +64,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ImageAnalyzerTest.cs" />
+    <Compile Include="ExceptionHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DxReadinessSolution.Business\DxReadinessSolution.Business.csproj">
+      <Project>{6add7043-cea3-458f-9814-a6da7e42167f}</Project>
+      <Name>DxReadinessSolution.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DxReadinessSolution.CrossCutting.Testing\DxReadinessSolution.CrossCutting.Testing.csproj">
       <Project>{D7D0BB0D-232E-4980-A77F-D12CB2B9AE63}</Project>
       <Name>DxReadinessSolution.CrossCutting.Testing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DxReadinessSolution.Data.ImageRecognition\DxReadinessSolution.Data.ImageRecognition.csproj">
-      <Project>{00d4af6b-efec-429a-8d28-d733e9a88af3}</Project>
-      <Name>DxReadinessSolution.Data.ImageRecognition</Name>
     </ProjectReference>
     <ProjectReference Include="..\DxReadinessSolution.Domain\DxReadinessSolution.Domain.csproj">
       <Project>{a68c1cc3-bf4b-423c-b325-0d50706af7ce}</Project>

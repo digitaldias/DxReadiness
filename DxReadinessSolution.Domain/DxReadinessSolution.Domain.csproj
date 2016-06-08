@@ -45,10 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\Converters\IStreamToByteConverter.cs" />
     <Compile Include="Contracts\IByteStreamVerifier.cs" />
     <Compile Include="Contracts\IExceptionHandler.cs" />
     <Compile Include="Contracts\IImageAnalyzer.cs" />
     <Compile Include="Contracts\IImageAnalyzerService.cs" />
+    <Compile Include="Contracts\IImageManager.cs" />
     <Compile Include="Contracts\ILogger.cs" />
     <Compile Include="Contracts\IVerifier.cs" />
     <Compile Include="Entities\ImageResult.cs" />

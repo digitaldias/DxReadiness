@@ -218,14 +218,6 @@
       <Project>{d3c0c59c-a492-419a-82e8-f456b3d3d948}</Project>
       <Name>DxReadinessSolution.Fakes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ImageAnalysisActor.Interfaces\ImageAnalysisActor.Interfaces.csproj">
-      <Project>{856d8e3d-d71f-4fff-b64d-ae6d95ca1e64}</Project>
-      <Name>ImageAnalysisActor.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ImageAnalyzerService\ImageAnalyzerService.csproj">
-      <Project>{2e6303d8-d7c3-4e64-9a62-5de18125971a}</Project>
-      <Name>ImageAnalyzerService</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

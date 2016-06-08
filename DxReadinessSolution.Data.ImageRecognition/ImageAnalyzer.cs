@@ -9,9 +9,7 @@ using Microsoft.ProjectOxford.Vision.Contract;
 using Microsoft.ServiceBus.Messaging;
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 
@@ -19,15 +17,13 @@ namespace DxReadinessSolution.Data.ImageRecognition
 {
     public class ImageAnalyzer : IImageAnalyzer
     {
-        private string subscriptionKeyEmotion = ImageAnalyzerConfiguration.SubscriptionKeyEmotion;
-        private string subscriptionKeyVision = ImageAnalyzerConfiguration.SubscriptionKeyVision;
-
-        
-        private static string connectionString = "Endpoint=sb://picturificeventhub-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SjyjmldvvOcenrsvWP24H7VVPw3Jf3UNSn42utEBCqs=";
+        private string subscriptionKeyEmotion  = ImageAnalyzerConfiguration.SubscriptionKeyEmotion;
+        private string subscriptionKeyVision   = ImageAnalyzerConfiguration.SubscriptionKeyVision;
+        private static string connectionString = ImageAnalyzerConfiguration.ConnectionStringEventHub;
 
         public async Task<ImageResult> AnalyzeImage(Stream imageStream)
         {
-            VisionServiceClient visionServiceClient = new VisionServiceClient(subscriptionKeyVision);
+            VisionServiceClient visionServiceClient   = new VisionServiceClient(subscriptionKeyVision);
             EmotionServiceClient emotionServiceClient = new EmotionServiceClient(subscriptionKeyEmotion);
             
             using (imageStream )
@@ -64,11 +60,12 @@ namespace DxReadinessSolution.Data.ImageRecognition
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(ImageResult));
             ser.WriteObject(stream1, result);
             EventData sendEvent = new EventData(stream1);
-            try { 
-            EventHubClient ehClient = EventHubClient.CreateFromConnectionString(connectionString, "picturificeventhub" );
-            ehClient.SendAsync(sendEvent);
+            try
+            {
+                EventHubClient ehClient = EventHubClient.CreateFromConnectionString(connectionString, "picturificeventhub");
+                ehClient.SendAsync(sendEvent);
             }
-            catch(Exception e) { }
+            catch (Exception e) { }
         }
 
         private ImageResult createImageResult(AnalysisResult analysisResult, Emotion[] emotionResult)

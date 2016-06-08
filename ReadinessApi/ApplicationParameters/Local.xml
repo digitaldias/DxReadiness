@@ -3,6 +3,5 @@
    <Parameters>
       <Parameter Name="ImageAnalyzerService_InstanceCount" Value="1" />
       <Parameter Name="ReadinessWeb_InstanceCount" Value="1" />
-      <Parameter Name="ImageAnalysisActorService_PartitionCount" Value="1" />
    </Parameters>
 </Application>

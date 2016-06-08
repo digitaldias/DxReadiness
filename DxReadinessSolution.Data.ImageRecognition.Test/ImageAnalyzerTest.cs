@@ -1,25 +1,30 @@
-﻿using System;
+﻿using DxReadinessSolution.CrossCutting.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
-using System.IO;
 using Should;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace DxReadinessSolution.Data.ImageRecognition.Test
 {
     [TestClass]
-    public class ImageAnalyzerTest
+    public class ImageAnalyzerTest : TestsFor<ImageAnalyzer>
     {
         [TestMethod]
-        public async Task  TestMethod1()
+        public void ImageAnalyzer_CanBeConstructedByTestFramework()
+        {
+            Instance.ShouldNotBeNull();
+        }
+
+
+        [TestMethod, TestCategory("SUPERSLOW")]
+        public async Task  ImageAnalyzer_WillReturnResultOfAnalysis()
         {
             // Arrange 
-            var imageAnalyzer = new ImageAnalyzer();
-
             string path = @"C:\temp\sample1.jpg";
             var imageStream = File.OpenRead(path);
             
             // Act
-            var result = await imageAnalyzer.AnalyzeImage(imageStream);
+            var result = await Instance.AnalyzeImage(imageStream);
 
             // Assert
             result.ShouldNotBeNull();

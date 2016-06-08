@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Services.Runtime;
 
-namespace ImageAnalyzerService
+namespace DxReadinessSolution.Services
 {
     internal static class Program
     {
