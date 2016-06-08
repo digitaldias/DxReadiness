@@ -22,10 +22,7 @@ namespace DxReadinessSolution.Data.ImageRecognition
         private string subscriptionKeyEmotion = ImageAnalyzerConfiguration.SubscriptionKeyEmotion;
         private string subscriptionKeyVision = ImageAnalyzerConfiguration.SubscriptionKeyVision;
 
-        //private string namespaceName = "----ServiceBusNamespaceName-----";
-        //private string eventHubName = "----EventHubName-----";
-        //private string sasKeyName = "-----SharedAccessSignatureKeyName-----";
-        //private string sasKey = "---SharedAccessSignatureKey----";
+        
         private static string connectionString = "Endpoint=sb://picturificeventhub-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SjyjmldvvOcenrsvWP24H7VVPw3Jf3UNSn42utEBCqs=";
 
         public async Task<ImageResult> AnalyzeImage(Stream imageStream)
