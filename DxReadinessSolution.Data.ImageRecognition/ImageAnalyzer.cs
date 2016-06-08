@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 
 namespace DxReadinessSolution.Data.ImageRecognition
@@ -60,12 +61,17 @@ namespace DxReadinessSolution.Data.ImageRecognition
         }
 
         private static void sendMessage(ImageResult result)
-        {
-            //byte[] payloadBytes = result.ToString();
-            EventData sendEvent = new EventData();
+        {      
 
-            EventHubClient ehClient = EventHubClient.CreateFromConnectionString(connectionString);
+            MemoryStream stream1 = new MemoryStream();
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(ImageResult));
+            ser.WriteObject(stream1, result);
+            EventData sendEvent = new EventData(stream1);
+            try { 
+            EventHubClient ehClient = EventHubClient.CreateFromConnectionString(connectionString, "picturificeventhub" );
             ehClient.SendAsync(sendEvent);
+            }
+            catch(Exception e) { }
         }
 
         private ImageResult createImageResult(AnalysisResult analysisResult, Emotion[] emotionResult)
