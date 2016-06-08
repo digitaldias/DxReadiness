@@ -1,5 +1,7 @@
-﻿using DxReadinessSolution.Domain.Contracts;
+﻿using DxReadinessSolution.Business;
+using DxReadinessSolution.Domain.Contracts;
 using DxReadinessSolution.Domain.Entities;
+using DxReadinessSolution.Fakes;
 using Microsoft.ProjectOxford.Emotion;
 using Microsoft.ProjectOxford.Emotion.Contract;
 using Microsoft.ProjectOxford.Vision;
@@ -18,16 +20,29 @@ namespace DxReadinessSolution.Data.ImageRecognition
         
         public async Task<AnalysisResult> AnalyzeImage(Stream imageStream)
         {
-            VisionServiceClient VisionServiceClient = new VisionServiceClient(subscriptionKeyVision);
+            VisionServiceClient visionServiceClient = new VisionServiceClient(subscriptionKeyVision);
             EmotionServiceClient emotionServiceClient = new EmotionServiceClient(subscriptionKeyEmotion);
             
             using (imageStream )
             {
-                VisualFeature[] visualFeatures = new VisualFeature[] { VisualFeature.Adult, VisualFeature.Categories, VisualFeature.Color, VisualFeature.Description, VisualFeature.Faces, VisualFeature.ImageType, VisualFeature.Tags };
-                AnalysisResult analysisResult  = await VisionServiceClient.AnalyzeImageAsync(imageStream, visualFeatures);
-                Emotion[] emotionResult = await emotionServiceClient.RecognizeAsync(imageStream);
+                MemoryStream stream2 = new MemoryStream();
+                imageStream.CopyTo(stream2);
+                imageStream.Seek(0, SeekOrigin.Begin);
+                stream2.Seek(0, SeekOrigin.Begin);
+
+                var visualFeatures = new VisualFeature[] { VisualFeature.Adult, VisualFeature.Categories, VisualFeature.Color, VisualFeature.Description, VisualFeature.Faces, VisualFeature.ImageType, VisualFeature.Tags };
+
+                var exceptionHandler = new ExceptionHandler(new Logger());
+                var emotionResult = await exceptionHandler.Get(() => 
+                    emotionServiceClient.RecognizeAsync (imageStream));                   
+
+                var analysisResult = await exceptionHandler.Get(()=>
+                     visionServiceClient.AnalyzeImageAsync(stream2, visualFeatures)
+                    );
+                   
                 return analysisResult;
             }
+            
         }
 
 
