@@ -7,7 +7,6 @@ using Microsoft.ProjectOxford.Emotion.Contract;
 using Microsoft.ProjectOxford.Vision;
 using Microsoft.ProjectOxford.Vision.Contract;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,7 +19,7 @@ namespace DxReadinessSolution.Data.ImageRecognition
         private string subscriptionKeyVision = ImageAnalyzerConfiguration.SubscriptionKeyVision;
         
         
-        public async Task<ImageResult> AnalyzeImage(Stream imageStream)
+        public async Task<AnalysisResult> AnalyzeImage(Stream imageStream)
         {
             VisionServiceClient visionServiceClient = new VisionServiceClient(subscriptionKeyVision);
             EmotionServiceClient emotionServiceClient = new EmotionServiceClient(subscriptionKeyEmotion);
@@ -42,107 +41,29 @@ namespace DxReadinessSolution.Data.ImageRecognition
                      visionServiceClient.AnalyzeImageAsync(stream2, visualFeatures)
                     );
 
-                var imageResult = createImageResult(analysisResult, emotionResult);
+                GetHighestEmotion(emotionResult);
 
-                return imageResult;
+                return analysisResult;
             }
             
         }
 
-        private ImageResult createImageResult(AnalysisResult analysisResult, Emotion[] emotionResult)
+        private void GetHighestEmotion(Emotion[] emotionResult)
         {
-            ImageResult result = new ImageResult();
+            var firstPerson = emotionResult[0];
 
-            foreach(var cat in analysisResult.Categories)
-            {
-                if (cat.Score > 0.6)
-                    result.Categories.Add(cat.Name);
-            }
+            var type = firstPerson.Scores.GetType();
 
-            foreach (var face in analysisResult.Faces)
-            {
-                result.Ages.Add(face.Age);
+            var list = type
+                .GetProperties()
+                .Select(property => new
+                {
+                    Name = property.Name,
+                    Value = (float)property.GetValue(property)
+                });
 
-                if (face.Gender == "Male")
-                    result.MenFaces++;
-                else
-                    result.WomenFaces++;
-            }
+            list.OrderByDescending(o => o.Value);
 
-            foreach(var tag in analysisResult.Tags)
-            {
-                if (tag.Confidence > 0.6)
-                    result.Tags.Add(tag.Name);
-            }
-
-            foreach (var emotion in emotionResult)
-            {
-                var em = new Dictionary<string, float>();
-                AddEmotions(emotion, em);
-                result.Emotions.Add(em);
-            }
-
-            return result;
-        }
-
-        private static void AddEmotions(Emotion emotion, Dictionary<string, float> em)
-        {
-
-            //var firstPerson = emotionResult[0];
-
-            //var type = emotion.Scores.GetType();
-
-            //var list = type
-            //.GetProperties()
-            //.Select(property => new
-            //{
-            //    Name = property.Name,
-            //    Value = (float)property.GetValue(property)
-            //}).ToList();
-
-            //list.Where(o => o.Value > 0.7)
-            //   .OrderByDescending(o => o.Value);
-
-            const double threshold = 0.7 ;
-
-            if (emotion.Scores.Anger > threshold)
-            {
-                em.Add("Anger", emotion.Scores.Anger);
-            }
-            if (emotion.Scores.Contempt > threshold)
-            {
-                em.Add("Contempt", emotion.Scores.Contempt);
-            }
-
-            if (emotion.Scores.Disgust > threshold)
-            {
-                em.Add("Disgust", emotion.Scores.Disgust);
-            }
-
-            if (emotion.Scores.Fear > threshold)
-            {
-                em.Add("Fear", emotion.Scores.Fear);
-            }
-
-            if (emotion.Scores.Happiness > threshold)
-            {
-                em.Add("Happiness", emotion.Scores.Happiness);
-            }
-
-            if (emotion.Scores.Neutral > threshold)
-            {
-                em.Add("Neutral", emotion.Scores.Neutral);
-            }
-
-            if (emotion.Scores.Sadness > threshold)
-            {
-                em.Add("Sadness", emotion.Scores.Sadness);
-            }
-
-            if (emotion.Scores.Surprise > threshold)
-            {
-                em.Add("Surprise", emotion.Scores.Surprise);
-            }
         }
     }
 }
