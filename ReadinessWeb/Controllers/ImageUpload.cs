@@ -2,6 +2,8 @@
 using ImageAnalysisActor.Interfaces;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Client;
+using ReadinessWeb.IoC;
+using StructureMap;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,9 +18,10 @@ namespace ReadinessWeb.Controllers
     {
         private readonly IByteStreamVerifier _byteStreamVerifier;
 
+
         public ImageUpload(IByteStreamVerifier byteStreamVerifier)
         {
-            _byteStreamVerifier = byteStreamVerifier;
+            _byteStreamVerifier = Startup.DiContainer.GetInstance<IByteStreamVerifier>();
         }
 
 

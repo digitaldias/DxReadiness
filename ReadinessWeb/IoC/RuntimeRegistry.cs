@@ -16,6 +16,7 @@ namespace ReadinessWeb.IoC
                 x.Assembly("DxReadinessSolution.Domain");
                 x.Assembly("DxReadinessSolution.Business");
                 x.Assembly("DxReadinessSolution.Fakes");
+
                 x.WithDefaultConventions();
             });
         }
