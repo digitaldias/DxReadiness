@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProjectGuid>{2E6303D8-D7C3-4E64-9A62-5DE18125971A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ImageAnalyzerService</RootNamespace>
+    <AssemblyName>ImageAnalyzerService</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AdditionalFileItemNames>$(AdditionalFileItemNames);None</AdditionalFileItemNames>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ServiceFabric.Data, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=AMD64">
+      <HintPath>..\packages\Microsoft.ServiceFabric.Data.2.0.217\lib\net45\Microsoft.ServiceFabric.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ServiceFabric.Data.Interfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=AMD64">
+      <HintPath>..\packages\Microsoft.ServiceFabric.Data.2.0.217\lib\net45\Microsoft.ServiceFabric.Data.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ServiceFabric.Internal, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=AMD64">
+      <HintPath>..\packages\Microsoft.ServiceFabric.5.0.217\lib\net45\Microsoft.ServiceFabric.Internal.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ServiceFabric.Internal.Strings, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=AMD64">
+      <HintPath>..\packages\Microsoft.ServiceFabric.5.0.217\lib\net45\Microsoft.ServiceFabric.Internal.Strings.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ServiceFabric.Services, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=AMD64">
+      <HintPath>..\packages\Microsoft.ServiceFabric.Services.2.0.217\lib\net45\Microsoft.ServiceFabric.Services.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Fabric, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=AMD64">
+      <HintPath>..\packages\Microsoft.ServiceFabric.5.0.217\lib\net45\System.Fabric.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IImageAnalyzerService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ImageAnalyzerService.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="ServiceEventSource.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PackageRoot\Config\Settings.xml" />
+    <None Include="PackageRoot\ServiceManifest.xml" />
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DxReadinessSolution.Business\DxReadinessSolution.Business.csproj">
+      <Project>{6add7043-cea3-458f-9814-a6da7e42167f}</Project>
+      <Name>DxReadinessSolution.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DxReadinessSolution.Data.ImageRecognition\DxReadinessSolution.Data.ImageRecognition.csproj">
+      <Project>{00d4af6b-efec-429a-8d28-d733e9a88af3}</Project>
+      <Name>DxReadinessSolution.Data.ImageRecognition</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DxReadinessSolution.Domain\DxReadinessSolution.Domain.csproj">
+      <Project>{A68C1CC3-BF4B-423C-B325-0D50706AF7CE}</Project>
+      <Name>DxReadinessSolution.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DxReadinessSolution.Fakes\DxReadinessSolution.Fakes.csproj">
+      <Project>{d3c0c59c-a492-419a-82e8-f456b3d3d948}</Project>
+      <Name>DxReadinessSolution.Fakes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
