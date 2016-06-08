@@ -11,8 +11,6 @@ namespace ImageAnalysisActor
     [StatePersistence(StatePersistence.Persisted)]
     internal class ImageAnalysisActor : Actor, IImageAnalysisActor
     {
-
-
         public  Task<ImageResult> AnalyzeImageStreamAsync(Stream imageBytes)
         {
             //TODO: Pedro implement this once Rina is done
@@ -22,13 +20,7 @@ namespace ImageAnalysisActor
         protected override Task OnActivateAsync()
         {
             ActorEventSource.Current.ActorMessage(this, "Actor activated.");
-
-
             return this.StateManager.TryAddStateAsync("count", 0);
         }
-
-
-
-
     }
 }

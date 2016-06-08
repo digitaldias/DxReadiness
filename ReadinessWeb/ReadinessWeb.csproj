@@ -222,6 +222,10 @@
       <Project>{856d8e3d-d71f-4fff-b64d-ae6d95ca1e64}</Project>
       <Name>ImageAnalysisActor.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ImageAnalyzerService\ImageAnalyzerService.csproj">
+      <Project>{2E6303D8-D7C3-4E64-9A62-5DE18125971A}</Project>
+      <Name>ImageAnalyzerService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

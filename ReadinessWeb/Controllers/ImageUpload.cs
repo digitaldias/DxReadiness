@@ -1,7 +1,10 @@
 ﻿using DxReadinessSolution.Domain.Contracts;
 using ImageAnalysisActor.Interfaces;
+using ImageAnalyzerService;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Client;
+using Microsoft.ServiceFabric.Services.Remoting.Client;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -27,9 +30,17 @@ namespace ReadinessWeb.Controllers
             if (!_byteStreamVerifier.IsValid(imageBytes))
                 return;
 
-            await ConvertImageBytesToStreamAndAnalyzeIt(imageBytes);
+            var serviceProxy = CreateImageAnalyzerProxy();
+
+            return await _exceptionHandler.Run(() => serviceProxy.Analyze(imageBytes));
         }
 
+        private static IImageAnalyzerService CreateImageAnalyzerProxy()
+        {
+            var uri = new Uri("fabric:/ReadinessApi/ImageAnalyzerService");
+            var serviceProxy = ServiceProxy.Create<IImageAnalyzerService>(uri);
+            return serviceProxy;
+        }
 
         private async Task ConvertImageBytesToStreamAndAnalyzeIt(byte[] imageBytes)
         {
