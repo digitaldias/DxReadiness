@@ -82,8 +82,8 @@
       <HintPath>..\packages\Microsoft.ServiceFabric.Services.2.0.217\lib\net45\Microsoft.ServiceFabric.Services.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
@@ -120,7 +120,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\ImageUpload.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="IoC\RuntimeRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OwinCommunicationListener.cs" />
@@ -223,7 +223,7 @@
       <Name>ImageAnalysisActor.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\ImageAnalyzerService\ImageAnalyzerService.csproj">
-      <Project>{2E6303D8-D7C3-4E64-9A62-5DE18125971A}</Project>
+      <Project>{2e6303d8-d7c3-4e64-9a62-5de18125971a}</Project>
       <Name>ImageAnalyzerService</Name>
     </ProjectReference>
   </ItemGroup>
@@ -271,7 +271,9 @@
     <Content Include="wwwroot\img\intro-bg- orig.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\img\intro-bg.jpg" />
+    <Content Include="wwwroot\img\intro-bg.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="wwwroot\img\map-marker.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

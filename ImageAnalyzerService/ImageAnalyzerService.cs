@@ -1,19 +1,14 @@
-﻿using System;
+﻿using DxReadinessSolution.Business;
+using DxReadinessSolution.Data.ImageRecognition;
+using DxReadinessSolution.Domain.Entities;
+using DxReadinessSolution.Fakes;
+using Microsoft.ServiceFabric.Services.Communication.Runtime;
+using Microsoft.ServiceFabric.Services.Remoting.FabricTransport.Runtime;
+using Microsoft.ServiceFabric.Services.Runtime;
 using System.Collections.Generic;
 using System.Fabric;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.ServiceFabric.Services.Communication.Runtime;
-using Microsoft.ServiceFabric.Services.Runtime;
-using Microsoft.ServiceFabric.Services.Remoting.Runtime;
-using DxReadinessSolution.Domain.Contracts;
-using DxReadinessSolution.Domain.Entities;
 using System.IO;
-using Microsoft.ServiceFabric.Services.Remoting.FabricTransport.Runtime;
-using DxReadinessSolution.Data.ImageRecognition;
-using DxReadinessSolution.Fakes;
-using DxReadinessSolution.Business;
+using System.Threading.Tasks;
 
 namespace ImageAnalyzerService
 {
@@ -31,11 +26,15 @@ namespace ImageAnalyzerService
             _exceptionHandler = new ExceptionHandler(logger);
         }
 
-        public async Task<ImageResult> Analyze(Stream imageStream)
+        public async Task<ImageResult> Analyze(byte[] imageStream)
         {
             var analyzer = new ImageAnalyzer();
 
-            return await  _exceptionHandler.Get(() => analyzer.AnalyzeImage(imageStream));
+            var memoryStream = new MemoryStream(imageStream);
+
+            var result =  await  _exceptionHandler.Get(() => analyzer.AnalyzeImage(memoryStream));
+
+            return result;
         }
 
 
