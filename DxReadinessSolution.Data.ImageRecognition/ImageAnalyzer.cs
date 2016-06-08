@@ -6,8 +6,10 @@ using Microsoft.ProjectOxford.Emotion;
 using Microsoft.ProjectOxford.Emotion.Contract;
 using Microsoft.ProjectOxford.Vision;
 using Microsoft.ProjectOxford.Vision.Contract;
+using Microsoft.ServiceBus.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,8 +20,13 @@ namespace DxReadinessSolution.Data.ImageRecognition
     {
         private string subscriptionKeyEmotion = ImageAnalyzerConfiguration.SubscriptionKeyEmotion;
         private string subscriptionKeyVision = ImageAnalyzerConfiguration.SubscriptionKeyVision;
-        
-        
+
+        //private string namespaceName = "----ServiceBusNamespaceName-----";
+        //private string eventHubName = "----EventHubName-----";
+        //private string sasKeyName = "-----SharedAccessSignatureKeyName-----";
+        //private string sasKey = "---SharedAccessSignatureKey----";
+        private static string connectionString = "Endpoint=sb://picturificeventhub-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SjyjmldvvOcenrsvWP24H7VVPw3Jf3UNSn42utEBCqs=";
+
         public async Task<ImageResult> AnalyzeImage(Stream imageStream)
         {
             VisionServiceClient visionServiceClient = new VisionServiceClient(subscriptionKeyVision);
@@ -35,18 +42,30 @@ namespace DxReadinessSolution.Data.ImageRecognition
                 var visualFeatures = new VisualFeature[] { VisualFeature.Adult, VisualFeature.Categories, VisualFeature.Color, VisualFeature.Description, VisualFeature.Faces, VisualFeature.ImageType, VisualFeature.Tags };
 
                 var exceptionHandler = new ExceptionHandler(new Logger());
-                var emotionResult = await exceptionHandler.Get(() => 
-                    emotionServiceClient.RecognizeAsync (imageStream));                   
+                var emotionResult = await exceptionHandler.Get(() =>
+                    emotionServiceClient.RecognizeAsync(imageStream));
 
-                var analysisResult = await exceptionHandler.Get(()=>
+                var analysisResult = await exceptionHandler.Get(() =>
                      visionServiceClient.AnalyzeImageAsync(stream2, visualFeatures)
                     );
 
                 var imageResult = createImageResult(analysisResult, emotionResult);
+                sendMessage(imageResult);
 
                 return imageResult;
             }
-            
+
+
+
+        }
+
+        private static void sendMessage(ImageResult result)
+        {
+            //byte[] payloadBytes = result.ToString();
+            EventData sendEvent = new EventData((payloadBytes);
+
+            EventHubClient ehClient = EventHubClient.CreateFromConnectionString(connectionString);
+            ehClient.SendAsync(sendEvent);
         }
 
         private ImageResult createImageResult(AnalysisResult analysisResult, Emotion[] emotionResult)
@@ -144,5 +163,7 @@ namespace DxReadinessSolution.Data.ImageRecognition
                 em.Add("Surprise", emotion.Scores.Surprise);
             }
         }
+
+
     }
 }
