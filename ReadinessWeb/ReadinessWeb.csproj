@@ -136,14 +136,30 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="wwwroot\css\bootstrap-theme.css.map" />
-    <None Include="wwwroot\css\bootstrap-theme.min.css.map" />
-    <None Include="wwwroot\css\bootstrap.css.map" />
-    <None Include="wwwroot\css\bootstrap.min.css.map" />
-    <None Include="wwwroot\font-awesome\fonts\fontawesome-webfont.eot" />
-    <None Include="wwwroot\font-awesome\fonts\fontawesome-webfont.ttf" />
-    <None Include="wwwroot\font-awesome\fonts\fontawesome-webfont.woff" />
-    <None Include="wwwroot\font-awesome\fonts\FontAwesome.otf" />
+    <None Include="wwwroot\css\bootstrap-theme.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\css\bootstrap-theme.min.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\css\bootstrap.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\css\bootstrap.min.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\font-awesome\fonts\fontawesome-webfont.eot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\font-awesome\fonts\fontawesome-webfont.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\font-awesome\fonts\fontawesome-webfont.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\font-awesome\fonts\FontAwesome.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="wwwroot\font-awesome\less\bordered-pulled.less" />
     <None Include="wwwroot\font-awesome\less\core.less" />
     <None Include="wwwroot\font-awesome\less\fixed-width.less" />
@@ -170,10 +186,18 @@
     <None Include="wwwroot\font-awesome\scss\_spinning.scss" />
     <None Include="wwwroot\font-awesome\scss\_stacked.scss" />
     <None Include="wwwroot\font-awesome\scss\_variables.scss" />
-    <None Include="wwwroot\fonts\glyphicons-halflings-regular.eot" />
-    <None Include="wwwroot\fonts\glyphicons-halflings-regular.ttf" />
-    <None Include="wwwroot\fonts\glyphicons-halflings-regular.woff" />
-    <None Include="wwwroot\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\fonts\glyphicons-halflings-regular.eot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\fonts\glyphicons-halflings-regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\fonts\glyphicons-halflings-regular.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\fonts\glyphicons-halflings-regular.woff2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="wwwroot\less\picturiffic.less" />
     <None Include="wwwroot\less\mixins.less" />
     <None Include="wwwroot\less\variables.less" />
@@ -182,9 +206,17 @@
     <None Include="wwwroot\sass\_variables.scss" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DxReadinessSolution.Business\DxReadinessSolution.Business.csproj">
+      <Project>{6add7043-cea3-458f-9814-a6da7e42167f}</Project>
+      <Name>DxReadinessSolution.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DxReadinessSolution.Domain\DxReadinessSolution.Domain.csproj">
       <Project>{A68C1CC3-BF4B-423C-B325-0D50706AF7CE}</Project>
       <Name>DxReadinessSolution.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DxReadinessSolution.Fakes\DxReadinessSolution.Fakes.csproj">
+      <Project>{d3c0c59c-a492-419a-82e8-f456b3d3d948}</Project>
+      <Name>DxReadinessSolution.Fakes</Name>
     </ProjectReference>
     <ProjectReference Include="..\ImageAnalysisActor.Interfaces\ImageAnalysisActor.Interfaces.csproj">
       <Project>{856d8e3d-d71f-4fff-b64d-ae6d95ca1e64}</Project>
@@ -193,29 +225,75 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="wwwroot\css\bootstrap-theme.css" />
-    <Content Include="wwwroot\css\bootstrap-theme.min.css" />
-    <Content Include="wwwroot\css\bootstrap-orig.css" />
-    <Content Include="wwwroot\css\bootstrap.css" />
-    <Content Include="wwwroot\css\bootstrap.min-orig.css" />
-    <Content Include="wwwroot\css\bootstrap.min.css" />
-    <Content Include="wwwroot\css\picturiffic.css" />
-    <Content Include="wwwroot\css\picturiffic-orig.css" />
-    <Content Include="wwwroot\font-awesome\css\font-awesome.css" />
-    <Content Include="wwwroot\font-awesome\css\font-awesome.min.css" />
-    <Content Include="wwwroot\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="wwwroot\img\downloads-bg.jpg" />
-    <Content Include="wwwroot\img\intro-bg.jpg" />
-    <Content Include="wwwroot\img\map-marker.png" />
-    <Content Include="wwwroot\index.html" />
-    <Content Include="wwwroot\js\bootstrap.js" />
-    <Content Include="wwwroot\js\bootstrap.min.js" />
-    <Content Include="wwwroot\js\picturiffic.js" />
-    <Content Include="wwwroot\js\jquery.easing.min.js" />
-    <Content Include="wwwroot\js\jquery.js" />
-    <Content Include="wwwroot\js\npm.js" />
-    <Content Include="wwwroot\js\picturiffic-orig.js" />
+    <Content Include="wwwroot\css\bootstrap-theme.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\css\bootstrap-theme.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\css\bootstrap-orig.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\css\bootstrap.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\css\bootstrap.min-orig.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\css\bootstrap.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\css\picturiffic.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\css\picturiffic-orig.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\font-awesome\css\font-awesome.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\font-awesome\css\font-awesome.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\font-awesome\fonts\fontawesome-webfont.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\img\downloads-bg.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\img\intro-bg.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\img\map-marker.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\js\bootstrap.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\js\bootstrap.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\js\picturiffic.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\js\jquery.easing.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\js\jquery.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\js\npm.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\js\picturiffic-orig.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.ServiceFabric.Actors.2.0.217\build\Microsoft.ServiceFabric.Actors.targets" Condition="Exists('..\packages\Microsoft.ServiceFabric.Actors.2.0.217\build\Microsoft.ServiceFabric.Actors.targets')" />
