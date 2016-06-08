@@ -24,13 +24,13 @@ h4,
 h5,
 h6 {
     margin: 0 0 35px;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
-p {
+p { 
     margin: 0 0 25px;
     font-size: 18px;
     line-height: 1.5;
@@ -89,7 +89,7 @@ a:focus {
 }
 
 .navbar-custom a {
-    color: #fff;
+    color: #494949;
 }
 
 .navbar-custom .nav li a {
@@ -162,10 +162,18 @@ a:focus {
 
 .intro .intro-body .brand-heading {
     font-size: 40px;
+    color: #42dca3;
 }
 
 .intro .intro-body .intro-text {
     font-size: 18px;
+    color: #919191;
+}
+
+.intro .intro-body .intro-text2 {
+    font-size: 26px;
+    color: #42dca3;
+    font-weight: 700;
 }
 
 @media(min-width:768px) {

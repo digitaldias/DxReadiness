@@ -1,4 +1,6 @@
-﻿using Microsoft.Owin.StaticFiles;
+﻿using Microsoft.Owin;
+using Microsoft.Owin.FileSystems;
+using Microsoft.Owin.StaticFiles;
 using Owin;
 using ReadinessWeb.IoC;
 using StructureMap;
@@ -34,14 +36,26 @@ namespace ReadinessWeb
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.MapHttpAttributeRoutes();
         }
 
         private static void ConfigureStaticFiles(IAppBuilder appBuilder)
         {
-            var options = new FileServerOptions();
-            options.FileSystem = 
-            appBuilder.UseDefaultFiles();
-            appBuilder.UseStaticFiles();
+            var fileSystem = new PhysicalFileSystem(@".\wwwroot");
+            var options = new FileServerOptions
+            {
+                EnableDefaultFiles = true,
+                FileSystem = fileSystem,
+                RequestPath = PathString.Empty
+            };
+
+            options.DefaultFilesOptions.DefaultFileNames = new[] { "index.html" };
+            options.StaticFileOptions.FileSystem = fileSystem;
+            options.StaticFileOptions.ServeUnknownFileTypes = true;
+            options.EnableDirectoryBrowsing = true;
+
+            appBuilder.UseFileServer(options);
         }
     }
 }
