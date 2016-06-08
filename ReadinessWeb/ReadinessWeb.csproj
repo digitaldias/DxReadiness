@@ -268,9 +268,10 @@
     <Content Include="wwwroot\img\downloads-bg.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\img\intro-bg.jpg">
+    <Content Include="wwwroot\img\intro-bg- orig.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="wwwroot\img\intro-bg.jpg" />
     <Content Include="wwwroot\img\map-marker.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
