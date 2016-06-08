@@ -1,7 +1,7 @@
-﻿using System.Web.Http;
-using Owin;
-using StructureMap;
+﻿using Owin;
 using ReadinessWeb.IoC;
+using StructureMap;
+using System.Web.Http;
 
 namespace ReadinessWeb
 {
@@ -9,21 +9,36 @@ namespace ReadinessWeb
     {
         public static Container DiContainer;
 
-        // This code configures Web API. The Startup class is specified as a type
-        // parameter in the WebApp.Start method.
         public static void ConfigureApp(IAppBuilder appBuilder)
         {
-            // Configure Web API for self-host. 
             HttpConfiguration config = new HttpConfiguration();
-            DiContainer = new Container(new RuntimeRegistry());
 
+            ConfigureDependencyInversion();
+            ConfigureStaticFiles(appBuilder);
+            ConfigureRouting(config);
+
+            appBuilder.UseWebApi(config);
+
+        }
+
+        private static void ConfigureDependencyInversion()
+        {
+            DiContainer = new Container(new RuntimeRegistry());
+        }
+
+        private static void ConfigureRouting(HttpConfiguration config)
+        {
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+        }
 
-            appBuilder.UseWebApi(config);            
+        private static void ConfigureStaticFiles(IAppBuilder appBuilder)
+        {
+            appBuilder.UseDefaultFiles();
+            appBuilder.UseStaticFiles();
         }
     }
 }
