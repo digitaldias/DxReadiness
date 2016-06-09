@@ -25,23 +25,25 @@ namespace DxReadinessSolution.Data.ImageRecognition
         private string connectionString = ImageAnalyzerConfiguration.ConnectionStringEventHub;
 
         private readonly ExceptionHandler _exceptionHandler;
+        private readonly VisionServiceClient _visionServiceClient;
+        private readonly EmotionServiceClient _emotionServiceClient;
 
         public ImageAnalyzer()
         {
-            var logger = new Logger();
-            _exceptionHandler = new ExceptionHandler(logger);
+            var logger             = new Logger();
+            _exceptionHandler      = new ExceptionHandler(logger);
+            _visionServiceClient   = new VisionServiceClient(subscriptionKeyVision);
+            _emotionServiceClient  = new EmotionServiceClient(subscriptionKeyEmotion);
         }
 
         public async Task<ImageResult> AnalyzeImage(Stream imageStream)
         {
-            VisionServiceClient visionServiceClient   = new VisionServiceClient(subscriptionKeyVision);
-            EmotionServiceClient emotionServiceClient = new EmotionServiceClient(subscriptionKeyEmotion);
             
             MemoryStream stream2 = _exceptionHandler.Get(() => CreateStreamCopy(imageStream));
 
             var visualFeatures = new VisualFeature[] { VisualFeature.Adult, VisualFeature.Categories, VisualFeature.Color, VisualFeature.Description, VisualFeature.Faces, VisualFeature.ImageType, VisualFeature.Tags };
-            var emotionResult = await _exceptionHandler.Get(() => emotionServiceClient.RecognizeAsync(imageStream));
-            var analysisResult = await _exceptionHandler.Get(() => visionServiceClient.AnalyzeImageAsync(stream2, visualFeatures));
+            var emotionResult = await _exceptionHandler.Get(() => _emotionServiceClient.RecognizeAsync(imageStream));
+            var analysisResult = await _exceptionHandler.Get(() => _visionServiceClient.AnalyzeImageAsync(stream2, visualFeatures));
 
             var imageResult = CreateImageResultFromAnalysis(analysisResult, emotionResult);
 
@@ -83,7 +85,7 @@ namespace DxReadinessSolution.Data.ImageRecognition
             imageResult.Categories.AddRange(analysisResult.Categories.Where(category => category.Score > 0.6).Select(category => category.Name));
             imageResult.Tags.AddRange(analysisResult.Tags.Where(tag => tag.Confidence > 0.6).Select(tag => tag.Name));
 
-            imageResult.MenFaces += analysisResult.Faces.Where(face => face.Gender == "Male").Count();
+            imageResult.MenFaces   += analysisResult.Faces.Where(face => face.Gender == "Male").Count();
             imageResult.WomenFaces += analysisResult.Faces.Where(face => face.Gender == "Female").Count();
 
             CreateEmotionDictionariesAndAddThemToResult(emotionResult, imageResult);

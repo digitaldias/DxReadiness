@@ -11,9 +11,6 @@ using System.Threading.Tasks;
 
 namespace DxReadinessSolution.Services
 {
-    /// <summary>
-    /// An instance of this class is created for each service instance by the Service Fabric runtime.
-    /// </summary>
     internal sealed class ImageAnalyzerService : StatelessService, IImageAnalyzerService
     {
         public ImageAnalyzerService(StatelessServiceContext context)
