@@ -37,22 +37,17 @@ namespace DxReadinessSolution.Data.ImageRecognition
             VisionServiceClient visionServiceClient   = new VisionServiceClient(subscriptionKeyVision);
             EmotionServiceClient emotionServiceClient = new EmotionServiceClient(subscriptionKeyEmotion);
             
-            using (imageStream )
-            {
-                MemoryStream stream2 = CreateStreamCopy(imageStream);
+            MemoryStream stream2 = _exceptionHandler.Get(() => CreateStreamCopy(imageStream));
 
-                var visualFeatures = new VisualFeature[] { VisualFeature.Adult, VisualFeature.Categories, VisualFeature.Color, VisualFeature.Description, VisualFeature.Faces, VisualFeature.ImageType, VisualFeature.Tags };
+            var visualFeatures = new VisualFeature[] { VisualFeature.Adult, VisualFeature.Categories, VisualFeature.Color, VisualFeature.Description, VisualFeature.Faces, VisualFeature.ImageType, VisualFeature.Tags };
+            var emotionResult = await _exceptionHandler.Get(() => emotionServiceClient.RecognizeAsync(imageStream));
+            var analysisResult = await _exceptionHandler.Get(() => visionServiceClient.AnalyzeImageAsync(stream2, visualFeatures));
 
-                var emotionResult = await _exceptionHandler.Get(() => emotionServiceClient.RecognizeAsync(imageStream));
+            var imageResult = CreateImageResultFromAnalysis(analysisResult, emotionResult);
 
-                var analysisResult = await _exceptionHandler.Get(() => visionServiceClient.AnalyzeImageAsync(stream2, visualFeatures));
+            PostImageResultToEventHub(imageResult);
 
-                var imageResult = CreateImageResultFromAnalysis(analysisResult, emotionResult);
-
-                PostImageResultToEventHub(imageResult);
-
-                return imageResult;
-            }
+            return imageResult;
         }
 
 
