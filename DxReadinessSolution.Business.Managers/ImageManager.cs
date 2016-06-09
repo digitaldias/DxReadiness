@@ -32,14 +32,29 @@ namespace DxReadinessSolution.Business.Managers
 
         public async Task<ImageResult> Process(Stream imageStream)
         {
-            if (imageStream == null || imageStream.Length == 0)
+            MemoryStream memoryStream = ConvertReadOnlyStreamToMemoryStream(imageStream);
+
+            if (memoryStream == null || memoryStream.Length == 0)
                 return null;
 
-            var imageBytes = _streamToByteConverter.Convert(imageStream);
+            var imageBytes = _exceptionHandler.Get(() => _streamToByteConverter.Convert(memoryStream));
             if (!_byteStreamVerifier.IsValid(imageBytes))
                 return null;
 
             return await AnalyzeImageUsingServiceProxy(imageBytes);
+        }
+
+
+        private MemoryStream ConvertReadOnlyStreamToMemoryStream(Stream imageStream)
+        {
+            return _exceptionHandler.Get(() => 
+            {
+                var memoryStream = new MemoryStream();
+                imageStream.CopyTo(memoryStream);
+                memoryStream.Seek(0, SeekOrigin.Begin);
+
+                return memoryStream;
+            });
         }
 
 

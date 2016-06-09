@@ -206,6 +206,10 @@
     <None Include="wwwroot\sass\_variables.scss" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DxReadinessSolution.Business.Managers\DxReadinessSolution.Business.Managers.csproj">
+      <Project>{f6670760-fa29-44aa-a0e0-55cd6f876a59}</Project>
+      <Name>DxReadinessSolution.Business.Managers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DxReadinessSolution.Business\DxReadinessSolution.Business.csproj">
       <Project>{6add7043-cea3-458f-9814-a6da7e42167f}</Project>
       <Name>DxReadinessSolution.Business</Name>
